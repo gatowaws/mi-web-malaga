@@ -6,8 +6,6 @@
     <title>Mi Primera Página Web</title>
     
     <style>
-        @import url('https://googleapis.com');
-
         html {
             scroll-behavior: smooth;
         }
@@ -15,7 +13,7 @@
         body {
             background-color: #1a1a2e; 
             color: #ffffff;
-            font-family: 'Poppins', sans-serif; 
+            font-family: sans-serif; 
             text-align: center; 
             padding: 0;
             margin: 0;
@@ -55,13 +53,10 @@
             justify-content: center;
         }
 
-        #inicio {
-            background-color: #1a1a2e;
-        }
-
-        #contacto {
-            background-color: #111122; 
-        }
+        #inicio { background-color: #1a1a2e; }
+        #galeria { background-color: #16213e; }
+        #mapa { background-color: #1a1a2e; }
+        #contacto { background-color: #111122; }
 
         img {
             border-radius: 12px; 
@@ -78,9 +73,59 @@
             text-decoration: underline;
         }
 
-        /* ========================================== */
-        /* ✨ NUEVOS ESTILOS PARA EL FORMULARIO ✨ */
-        /* ========================================== */
+        /* CUADRÍCULA DE LA GALERÍA */
+        .galeria-contenedor {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 30px;
+        }
+
+        .tarjeta-foto {
+            background-color: #16213e;
+            border: 2px solid #0f3460;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            padding: 20px 10px;
+        }
+
+        .tarjeta-foto:hover {
+            transform: scale(1.05);
+            border-color: #e94560;
+            box-shadow: 0px 5px 15px rgba(233, 69, 96, 0.3);
+        }
+
+        .tarjeta-foto img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            margin: 0 0 15px 0;
+        }
+
+        .tarjeta-foto p {
+            margin: 0;
+            font-weight: bold;
+            font-size: 16px;
+            color: #ffffff;
+        }
+
+        /* 🗺️ ESTILO DEL CONTENEDOR DEL MAPA LOCAL 🗺️ */
+        .contenedor-mapa {
+            width: 100%;
+            max-width: 600px;
+            height: 350px;
+            margin: 20px auto;
+            border: 4px solid #0f3460;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0px 8px 20px rgba(0,0,0,0.4);
+        }
+
+        /* Formulario contenedor */
         .formulario-contenedor {
             background-color: #16213e;
             width: 100%;
@@ -88,35 +133,27 @@
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3); 
+            margin-top: 20px;
         }
-        
-        /* Cajas de texto y Menú desplegable */
-        input, textarea, select {
+
+        input, textarea {
             width: 100%;
             margin-bottom: 15px;
             padding: 12px;
-            border: 2px solid #0f3460; /* Borde inicial */
+            border: 2px solid #0f3460; 
             border-radius: 6px;
             box-sizing: border-box; 
             background-color: #1a1a2e;
             color: white;
-            font-family: 'Poppins', sans-serif;
-            outline: none; /* Quita el borde feo por defecto del navegador */
-            transition: all 0.3s ease; /* Hace que el cambio visual sea suave */
+            outline: none; 
         }
 
-        input::placeholder, textarea::placeholder {
-            color: #888;
+        input:focus, textarea:focus {
+            border-color: #e94560; 
+            box-shadow: 0px 0px 10px rgba(233, 69, 96, 0.5); 
         }
 
-        /* 🌟 Efecto cuando haces clic en una caja (Focus) */
-        input:focus, textarea:focus, select:focus {
-            border-color: #e94560; /* El borde cambia a rosa */
-            box-shadow: 0px 0px 10px rgba(233, 69, 96, 0.5); /* Crea el efecto de brillo */
-        }
-
-        /* 🚀 Botón con efectos animados */
-        button {
+        .boton-formulario {
             width: 100%;
             background-color: #e94560;
             color: white;
@@ -125,23 +162,8 @@
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.3s ease; /* Suaviza la animación */
         }
 
-        /* Efecto al pasar el ratón por encima del botón (Hover) */
-        button:hover {
-            background-color: #ff6b8b; /* Cambia a un rosa más claro */
-            transform: translateY(-2px); /* El botón sube un poquito mágicamente */
-            box-shadow: 0px 5px 15px rgba(233, 69, 96, 0.4); /* Sombra en el botón */
-        }
-
-        /* Efecto al hacer clic en el botón */
-        button:active {
-            transform: translateY(1px); /* El botón se hunde al presionarlo */
-        }
-
-        /* ✨ ESTILOS NUEVOS PARA EL BOTÓN AZUL INTERACTIVO ✨ */
         .boton-interactivo {
             background-color: #0f3460;
             color: white;
@@ -152,13 +174,6 @@
             border-radius: 8px;
             cursor: pointer;
             margin-top: 15px;
-            font-family: 'Poppins', sans-serif;
-            box-shadow: 0px 5px 15px rgba(15, 52, 96, 0.4);
-            transition: all 0.3s ease;
-        }
-        .boton-interactivo:hover {
-            background-color: #1f5191;
-            transform: scale(1.05); /* Se hace un poquito más grande al pasar el mouse */
         }
     </style>
 </head>
@@ -166,65 +181,96 @@
 
     <nav class="menu-navegacion">
         <a href="#inicio">Inicio</a>
+        <a href="#galeria">Galería</a>
+        <a href="#mapa">Dónde está</a>
         <a href="#contacto">Contacto</a>
     </nav>
 
-    <!-- SECCIÓN 1: INICIO -->
+    <!-- SECCIÓN 1: INICIO CON 3 FOTOS -->
     <section id="inicio" class="seccion">
-        <h1>Lo mas bonito de Malaga</h1>
+        <h1>Lo más bonito de Málaga</h1>
         
-        <img src="foto.jpg.jpg" alt="Mi foto" width="250" style="border: 5px solid grey; border-radius: 20px;">
+        <!-- Fila con las 3 imágenes principales de inicio -->
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 20px 0;">
+            <!-- Foto 1 de Inicio -->
+            <img src="cautivo.jpg" alt="Cautivo Málaga" width="220" style="border: 5px solid grey; border-radius: 20px; margin: 0;">
+            
+            <!-- Foto 2 de Inicio -->
+            <img src="cautibo 1.jpg" alt="Virgen Trinitaria" width="220" style="border: 5px solid grey; border-radius: 20px; margin: 0;">
+            
+            <!-- Foto 3 de Inicio -->
+            <img src="cautivo virgen trinitaria.jpg" alt="Málaga Centro" width="220" style="border: 5px solid grey; border-radius: 20px; margin: 0;">
+        </div>
         
         <p>
             <a href="https://google.com" target="_blank" class="enlace-google">Haz clic aquí para ir a Google</a>
         </p>
 
-        <!-- 🆕 AGREGADO: Párrafo de texto descriptivo -->
         <p style="font-size: 18px; color: #e2e2e2; max-width: 550px; margin: 15px auto; line-height: 1.6;">
-            ¡Bienvenido a mi rincón web! Málaga es una ciudad increíble llena de sol, playas hermosas y mucha historia. Esta es mi primera página web creada desde cero usando Visual Studio Code.
+            ¡Bienvenido a mi rincón web! Málaga es una ciudad increíble llena de sol, playas hermosas y mucha historia.
         </p>
 
-        <!-- 🆕 AGREGADO: Botón interactivo azul -->
-        <button class="boton-interactivo" onclick="alert('¡Gracias por hacer clic en mi botón!')">
+        <button class="boton-interactivo" onclick="alert('¡Gracias por visitar mi rincón malagueño!')">
             ✨ Más información
         </button>
+    </section>
 
-        <!-- 🆕 AGREGADO: Enlace secundario estilizado -->
-        <p style="margin-top: 25px; font-size: 15px;">
-            ¿Quieres saber más? Visita la <a href="https://malagaturismo.com" target="_blank" style="color: #ff6b8b; text-decoration: none; font-weight: bold;">Guía oficial de Turismo de Málaga</a>.
-        </p>
+    <!-- SECCIÓN 2: GALERÍA DE FOTOS -->
+    <section id="galeria" class="seccion">
+        <h2>Galería de Lugares</h2>
+        <p>Rincones especiales guardados en mi ordenador:</p>
+        
+        <div class="galeria-contenedor">
+            <div class="tarjeta-foto">
+                <img src="cautivo.jpg" alt="Foto 1">
+                <p>Nuestro Padre Jesús Cautivo</p>
+            </div>
 
-        <!-- 🆕 NUEVO: Video de YouTube integrado -->
-        <div class="video-contenedor" style="margin-top: 40px;">
-            <h2>Mira mi video favorito</h2>
-            <!-- Cambia el enlace de abajo por el video de YouTube que tú quieras -->
-            <a href="https://youtube.com" target="_blank" style="display: inline-block; background-color: #ff0000; color: white; padding: 12px 25px; font-weight: bold; text-decoration: none; border-radius: 8px; box-shadow: 0px 5px 15px rgba(255, 0, 0, 0.3); transition: 0.3s;">
-                ▶️ Reproducir en YouTube
-            </a>
+            <div class="tarjeta-foto">
+                <img src="cautibo 1.jpg" alt="Foto 2">
+                <p>María Santísima de la Trinidad</p>
+            </div>
+
+            <div class="tarjeta-foto">
+                <img src="cautivo virgen trinitaria.jpg" alt="Foto 3">
+                <p>Procesión en Málaga</p>
+            </div>
         </div>
     </section>
 
-    <!-- SECCIÓN 2: CONTACTO -->
-    <section id="contacto" class="seccion">
-        <div class="formulario-contenedor">
-            <h2>Escríbeme un mensaje</h2>
-            <form>
-                <input type="text" placeholder="Tu nombre" required>
-                
-                <input type="email" placeholder="Tu correo electrónico" required>
-                
-                <!-- 🆕 NUEVO: Menú desplegable para elegir motivo -->
-                <select required>
-                    <option value="" disabled selected>Selecciona un motivo...</option>
-                    <option value="saludo">Solo quiero saludar 👋</option>
-                    <option value="trabajo">Propuesta de trabajo 💼</option>
-                    <option value="duda">Tengo una duda ❓</option>
-                </select>
+    <!-- SECCIÓN 3: MAPA -->
+    <section id="mapa" class="seccion">
+        <h2>Callejero de Málaga</h2>
+        <p>Haz clic en el mapa o en el botón para abrir el callejero interactivo a pantalla completa:</p>
+        
+        <div class="contenedor-mapa">
+            <a href="https://openstreetmap.org" target="_blank">
+                <img src="mapa_malaga.jpg" alt="Mapa de Málaga" style="width: 100%; height: 100%; object-fit: cover; margin: 0; border-radius: 0;">
+            </a>
+        </div>
 
-                <textarea placeholder="Escribe tu mensaje aquí..." rows="4" required></textarea>
+        <a href="https://openstreetmap.org" target="_blank" style="text-decoration: none;">
+            <button class="boton-interactivo">
+                🗺️ Abrir Callejero Interactivo
+            </button>
+        </a>
+    </section>
+
+    <!-- SECCIÓN 4: CONTACTO -->
+    <section id="contacto" class="seccion">
+        <h2>Contacto</h2>
+        <div class="formulario-contenedor">
+            
+            <!-- ⬇️ AQUÍ PONES TU ENLACE DE FORMSPREE ⬇️ -->
+            <form action="https://formspree.io/f/mzepkngo" method="POST">
                 
-                <button type="submit">Enviar Mensaje</button>
+                <input type="text" name="nombre" placeholder="Tu Nombre" required>
+                <input type="email" name="correo" placeholder="Tu Correo Electrónico" required>
+                <textarea name="mensaje" placeholder="Escribe tu mensaje aquí..." rows="4" required></textarea>
+                
+                <button type="submit" class="boton-formulario">Enviar Mensaje</button>
             </form>
+            
         </div>
     </section>
 
